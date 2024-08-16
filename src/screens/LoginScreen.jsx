@@ -4,6 +4,7 @@ import FormTextField from '../components/FormTextField';
 import axios from 'axios';
 import Toast from 'react-native-toast-message';
 import axiosInstance from '../utils/axios';
+import {loadProfile, login} from '../services/AuthService';
 
 const LoginScreen = () => {
   const [email, setEmail] = useState('');
@@ -16,17 +17,12 @@ const LoginScreen = () => {
     setErrors({});
     try {
       console.log('2222222222222222222222');
-      const {data} = await axiosInstance.post('login', {
+      await login({
         email,
         password,
       });
-      console.log('res.data-------', data);
 
-      const {data: profile} = await axiosInstance.get('/profile', {
-        headers: {
-          Authorization: `Bearer ${data.token}`,
-        },
-      });
+      const profile = await loadProfile();
       console.log('profile-------', profile);
     } catch (e) {
       if (e.response?.status === 422) {
