@@ -1,12 +1,12 @@
 import {Button, SafeAreaView, StyleSheet, View} from 'react-native';
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import FormTextField from '../components/FormTextField';
-import axios from 'axios';
 import Toast from 'react-native-toast-message';
-import axiosInstance from '../utils/axios';
 import {loadProfile, login} from '../services/AuthService';
+import AuthContext from '../../contexts/AuthContext';
 
 const LoginScreen = () => {
+  const {setUser} = useContext(AuthContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState({});
@@ -24,6 +24,8 @@ const LoginScreen = () => {
 
       const profile = await loadProfile();
       console.log('profile-------', profile);
+
+      setUser(profile);
     } catch (e) {
       if (e.response?.status === 422) {
         setErrors(e.response.data.errors);
