@@ -11,7 +11,7 @@ const LoginScreen = () => {
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState({});
 
-  //   console.log(process.env.API_URL);
+  console.log(process.env.API_URL);
   const handleLogin = async () => {
     console.log('111111111111111111111111');
     setErrors({});

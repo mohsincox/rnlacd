@@ -17,3 +17,13 @@ export const loadProfile = async () => {
   });
   return profile;
 };
+
+export const logout = async () => {
+  const token = await getToken();
+
+  await axiosInstance.get('/logout', {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
