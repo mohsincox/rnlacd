@@ -8,6 +8,7 @@ import Toast from 'react-native-toast-message';
 import {loadProfile} from './src/services/AuthService';
 import AuthContext from './contexts/AuthContext';
 import SplashScreen from './src/screens/SplashScreen';
+import RegisterScreen from './src/screens/RegisterScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -45,7 +46,10 @@ const App = () => {
           {user ? (
             <Stack.Screen name="Home" component={HomeScreen} />
           ) : (
-            <Stack.Screen name="Login" component={LoginScreen} />
+            <>
+              <Stack.Screen name="Login" component={LoginScreen} />
+              <Stack.Screen name="Create account" component={RegisterScreen} />
+            </>
           )}
         </Stack.Navigator>
       </NavigationContainer>
