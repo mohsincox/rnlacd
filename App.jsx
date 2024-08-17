@@ -19,12 +19,12 @@ const App = () => {
   useEffect(() => {
     const runEffect = async () => {
       try {
-        const user = await loadProfile();
+        const loadUser = await loadProfile();
         console.log(
           '🚀 ~ runEffect ~ loadUser:',
-          JSON.stringify(user, null, 2),
+          JSON.stringify(loadUser, null, 2),
         );
-        setUser(user);
+        setUser(loadUser);
       } catch (e) {
         console.log('Failed to load user', e);
       }
