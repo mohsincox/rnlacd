@@ -1,5 +1,5 @@
 import axiosInstance from '../utils/axios';
-import {getToken, setToken} from './TokenService';
+import {setToken} from './TokenService';
 
 export const login = async credentials => {
   const {data} = await axiosInstance.post('login', credentials);
@@ -8,22 +8,12 @@ export const login = async credentials => {
 };
 
 export const loadProfile = async () => {
-  const token = await getToken();
-  console.log('🚀 ~ loadProfile ~ token:', token);
-  const {data: profile} = await axiosInstance.get('/profile', {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
+  const {data: profile} = await axiosInstance.get('/profile');
   return profile;
 };
 
 export const logout = async () => {
-  const token = await getToken();
+  await axiosInstance.get('/logout');
 
-  await axiosInstance.get('/logout', {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
+  await setToken(null); // should add in previous commit
 };
